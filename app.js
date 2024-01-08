@@ -5,18 +5,19 @@ var addButton = document.querySelector(".add-button");
 var incompletedTasks = document.getElementById("to-do"); 
 var completedTasks = document.getElementById("completed");
 
-
 // Create New List Item
 
-var createNewTaskElement = function(taskString) {
+var createNewTaskElement = function(taskName) {
 
     var newListItem = document.createElement("li");
+    newListItem.className = 'to-do__task';
 
     var newCheckBox = document.createElement("input");
     newCheckBox.type = "checkbox";
+    newCheckBox.className = 'to-do__checkbox';
     
     var newLabel = document.createElement("label");
-    newLabel.innerText = taskString;
+    newLabel.innerText = taskName;
     newLabel.className = 'task-name';
     
     var newInputField = document.createElement("input");
@@ -32,6 +33,7 @@ var createNewTaskElement = function(taskString) {
     
     var deleteButtonImage = document.createElement("img");
     deleteButtonImage.src = './remove.svg';
+    deleteButtonImage.className = 'delete-button__image';
   
     newDeleteButton.appendChild(deleteButtonImage);
 
@@ -48,15 +50,14 @@ var createNewTaskElement = function(taskString) {
 
 var addTask = function() {
 
-  // Create a new list item with the text from the #new-task:
   if (!addNewTaskField.value) {
     return;
   };
     
-  var newListItem = createNewTaskElement(addNewTaskField.value);
+  var listItem = createNewTaskElement(addNewTaskField.value);
 
-  incompletedTasks.appendChild(newListItem);
-  bindTaskEvents(newListItem, taskCompleted);
+  incompletedTasks.appendChild(listItem);
+  bindTaskEvents(listItem, taskCompleted);
 
   addNewTaskField.value = "";
 
@@ -64,7 +65,7 @@ var addTask = function() {
 
 // Edit an Existing Task
 
-var editTask=function(){
+var editTask=function() {
    
   var newListItem = this.parentNode;
   var editInput = newListItem.querySelector('input[type=text]');
@@ -82,7 +83,6 @@ var editTask=function(){
   }
 
   // Toggle .edit-mode on the parent.
-
   newListItem.classList.toggle("edit-mode");
 };
 
@@ -101,19 +101,23 @@ var deleteTask = function() {
 
 // Mark task completed
 
-var taskCompleted=function(){
+var taskCompleted = function() {
   // Append the task list item to the #completed-tasks
 
-  var newListItem = this.parentNode;
-  completedTasks.appendChild(newListItem);
-  bindTaskEvents(newListItem, taskIncomplete);
+  var listItem = this.parentNode;
+  var taskName = listItem.querySelector(".task-name");
+  taskName.classList.toggle('completed-task');
+  completedTasks.appendChild(listItem);
+  bindTaskEvents(listItem, taskIncomplete);
 }
 
 
-var taskIncomplete=function(){
-  var newListItem = this.parentNode;
-  incompletedTasks.appendChild(newListItem);
-  bindTaskEvents(newListItem,taskCompleted);
+var taskIncomplete = function() {
+  var listItem = this.parentNode;
+  var taskName = listItem.querySelector(".task-name");
+  taskName.classList.toggle('completed-task');
+  incompletedTasks.appendChild(listItem);
+  bindTaskEvents(listItem, taskCompleted);
 }
 
 // Set the click handler to the addTask function.
@@ -122,22 +126,22 @@ addButton.onclick = addTask;
 addButton.addEventListener("click", addTask);
 
 
-var bindTaskEvents=function(tasknewListItem, checkBoxEventHandler) {
+var bindTaskEvents=function(newListItem, checkBoxEventHandler) {
   // Select newListItems children
-  var checkBox=tasknewListItem.querySelector("input[type=checkbox]");
-  var editButton=tasknewListItem.querySelector("button.edit-button");
-  var deleteButton=tasknewListItem.querySelector("button.delete-button");
+  var checkBox = newListItem.querySelector(".to-do__checkbox");
+  var editButton = newListItem.querySelector("button.edit-button");
+  var deleteButton = newListItem.querySelector("button.delete-button");
 
 
-  //Bind editTask to edit button.
+  // Bind editTask to edit button.
   editButton.onclick = editTask;
-  //Bind deleteTask to delete button.
+  // Bind deleteTask to delete button.
   deleteButton.onclick = deleteTask;
-  //Bind taskCompleted to checkBoxEventHandler.
+  // Bind taskCompleted to checkBoxEventHandler.
   checkBox.onchange = checkBoxEventHandler;
 }
 
-// Cycle over incompletedTasks   ul list items
+// Cycle over incompletedTasks ul list items
 // For each list item
 
 for (var i = 0; i < incompletedTasks.children.length; i++) {

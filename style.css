@@ -16,11 +16,6 @@ h3 {
   list-style: none;
 }
   
-input, 
-button {
-  outline: none;
-}
-  
 button {
   width: 60px;
   border: none;
@@ -54,7 +49,7 @@ button:hover {
 }
 
 .more-info {
-  font-family: fantasy, cursive;
+  font-family: Fantasy, sans-serif;
 }
 
 .main-container {
@@ -138,7 +133,7 @@ button:hover {
 
 /* Completed */
 
-.completed {
+.completed-task {
   color: #888;
   text-decoration: line-through;
 }
