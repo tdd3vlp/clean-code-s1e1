@@ -30,6 +30,7 @@ button:hover {
   color: #3a3A3a;
 }
   
+/* Header */
 
 .eisenhower-maxtrix {
   width: 500px;
@@ -52,16 +53,23 @@ button:hover {
   font-family: Fantasy, sans-serif;
 }
 
+/* Main Part */
+
 .main-container {
   width: 500px;
   display: block;
   margin: 0 auto 0;
 }
 
-.task__input-field {
-  width: 56%;
-  flex-grow: 1;
-  display: inline-block;
+/* Add Item */
+
+.item-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 30px 0 10px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #333;
 }
 
 .add-task {
@@ -69,21 +77,11 @@ button:hover {
   margin: 16px 0;
 }
 
-/* Heading */
-
-.item-name {
-  margin: 0;
-  color: #333;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 30px 0 10px;
-  text-transform: uppercase;
-  border-bottom: 2px solid #333;
-}
-
 .task__input-field {
   margin: 0;
+  width: 56%;
   height: 21px;
+  flex-grow: 1;
   color: #888;
   padding: 0 9px;
   font-size: 18px;
@@ -98,7 +96,7 @@ button:hover {
   color: #333;
 }
 
-/* Task list */
+/* Incompleted Tasks */
 
 .to-do__task {
   display: flex;
@@ -131,7 +129,7 @@ button:hover {
   transform: rotateZ(0);
 }
 
-/* Completed */
+/* Completed Tasks */
 
 .completed-task {
   color: #888;
@@ -140,7 +138,8 @@ button:hover {
 
 /* Edit Task */
 
-ul li .task__input-field {
+.to-do__task .task__input-field,
+.edit-mode .task-name {
     display: none;
 }
 
@@ -148,6 +147,3 @@ ul li .task__input-field {
   display: inline-block;
 }
 
-.edit-mode label {
-  display: none;
-}

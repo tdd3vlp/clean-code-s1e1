@@ -55,7 +55,6 @@ var addTask = function() {
   };
     
   var listItem = createNewTaskElement(addNewTaskField.value);
-
   incompletedTasks.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
