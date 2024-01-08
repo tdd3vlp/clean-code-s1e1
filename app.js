@@ -96,7 +96,6 @@ var deleteTask = function() {
 
 }
 
-
 // Mark task completed
 
 var taskCompleted = function() {
