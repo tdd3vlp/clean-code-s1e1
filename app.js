@@ -89,11 +89,10 @@ var editTask=function() {
 
 var deleteTask = function() {
 
-  var newListItem = this.parentNode;
-  var ul = newListItem.parentNode;
+  var listItem = this.parentNode;
+  var ul = listItem.parentNode;
 
-  // Remove the parent list item from the ul.
-  ul.removeChild(newListItem);
+  ul.removeChild(listItem);
 
 }
 
@@ -101,15 +100,12 @@ var deleteTask = function() {
 // Mark task completed
 
 var taskCompleted = function() {
-  // Append the task list item to the #completed-tasks
-
   var listItem = this.parentNode;
   var taskName = listItem.querySelector(".task-name");
   taskName.classList.toggle('completed-task');
   completedTasks.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 }
-
 
 var taskIncomplete = function() {
   var listItem = this.parentNode;
@@ -121,38 +117,30 @@ var taskIncomplete = function() {
 
 // Set the click handler to the addTask function.
 
-// addButton.onclick = addTask;
 addButton.addEventListener("click", addTask);
 
-
-var bindTaskEvents=function(newListItem, checkBoxEventHandler) {
-  // Select newListItems children
+var bindTaskEvents = function(newListItem, checkBoxEventHandler) {
+  
   var checkBox = newListItem.querySelector(".to-do__checkbox");
   var editButton = newListItem.querySelector("button.edit-button");
   var deleteButton = newListItem.querySelector("button.delete-button");
 
-
-  // Bind editTask to edit button.
   editButton.onclick = editTask;
-  // Bind deleteTask to delete button.
   deleteButton.onclick = deleteTask;
-  // Bind taskCompleted to checkBoxEventHandler.
   checkBox.onchange = checkBoxEventHandler;
 }
 
-// Cycle over incompletedTasks ul list items
-// For each list item
+// Cycle over incompletedTasks
 
 for (var i = 0; i < incompletedTasks.children.length; i++) {
   bindTaskEvents(incompletedTasks.children[i], taskCompleted);
 }
 
-// Cycle over completedTasks ul list items
+// Cycle over completedTasks
 
 for (var i = 0; i < completedTasks.children.length; i++) {
   bindTaskEvents(completedTasks.children[i], taskIncomplete);
 }
 
 // TODO: prevent creation of empty tasks
-
 // TODO: Change edit to save when you are in edit mode
